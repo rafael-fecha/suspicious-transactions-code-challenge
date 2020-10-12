@@ -1,0 +1,20 @@
+{
+  "name": "suspicious-transactions-coding-challenge",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafael-fecha/suspicious-transactions-coding-challenge.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rafael-fecha/suspicious-transactions-coding-challenge/issues"
+  },
+  "homepage": "https://github.com/rafael-fecha/suspicious-transactions-coding-challenge#readme"
+}
