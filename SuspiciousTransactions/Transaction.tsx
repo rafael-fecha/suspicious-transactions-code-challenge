@@ -31,7 +31,7 @@ interface ITextConfigs {
 export const styles = StyleSheet.create({
   transaction: {
     margin: "10px",
-    border: "solid 0.5px gray",
+    // border: "solid 0.5px gray",
     flexDirection: "row",
     display: "flex",
     padding: "10px",

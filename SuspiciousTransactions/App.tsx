@@ -15,11 +15,12 @@ export interface TransactionSuspiciousResponse {
 	transactionSuspicious: TransactionSuspicious[]	
 }
 export interface TransactionSuspicious {
-	id: number,
-	sender: string,
-	recipient: string,
-	amount: string,
-	currency: string
+	id: number;
+	sender: string;
+	recipient: string;
+	amount: number;
+  currency: string;
+  locale: string;
 }
 
 export const styles = StyleSheet.create({
@@ -57,6 +58,10 @@ const App = () => {
     setTransactions(transactions?.filter((t: TransactionSuspicious) => t.id === id));
   };
 
+  const formatAmount = (amount: number, currency: string, locale: string): string => {
+    return new Intl.NumberFormat(locale, { style: 'currency', currency: currency }).format(amount);
+  }
+
   useEffect((): void => {
     fetchAppData();
   }, []);
@@ -71,7 +76,7 @@ const App = () => {
             id={t.id}
             fromUser={t.recipient}
             toUser={t.sender}
-            amount={`${t.currency}${t.amount}`}
+            amount={formatAmount(t.amount, t.currency, t.locale)}
             setTransactionStatusChange={setTransactionStatusChange}
           />
         ))}
