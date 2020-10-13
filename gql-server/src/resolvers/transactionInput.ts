@@ -1,4 +1,4 @@
-import { Field, InputType } from 'type-graphql';
+import { Field, InputType } from "type-graphql";
 
 @InputType()
 export class TransactionInput {
@@ -6,5 +6,5 @@ export class TransactionInput {
   id: number;
 
   @Field()
-  status: 'Suspicious' | 'Allowed' | 'Blocked';
+  status: "Suspicious" | "Allowed" | "Blocked";
 }

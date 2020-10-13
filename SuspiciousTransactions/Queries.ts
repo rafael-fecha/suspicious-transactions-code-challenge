@@ -8,13 +8,13 @@ export const queryList = {
         sender
         recipient
         amount
-        currency,
+        currency
         locale
       }
     }
   `,
   MARK_TRANSACTION: gql`
-     mutation MarkTransactionSuspicious($transactionData: TransactionInput!) {
+    mutation MarkTransactionSuspicious($transactionData: TransactionInput!) {
       markTransactionSuspicious(transactionData: $transactionData) {
         id
         sender

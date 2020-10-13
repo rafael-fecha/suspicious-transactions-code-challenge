@@ -7,7 +7,7 @@ import {
   View,
   TouchableOpacity,
   Text,
-  StyleSheet,
+  StyleSheet
 } from "react-native";
 
 import { StatusBar } from "expo-status-bar";
@@ -15,11 +15,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { SFC } from "react";
 
 interface ITransactionProps {
-    id: number;
-    fromUser: string;
-    toUser: string;
-    amount: string;
-    setTransactionStatusChange: (id: number) => void
+  id: number;
+  fromUser: string;
+  toUser: string;
+  amount: string;
+  setTransactionStatusChange: (id: number) => void;
 }
 
 interface ITextConfigs {
@@ -34,18 +34,18 @@ export const styles = StyleSheet.create({
     // border: "solid 0.5px gray",
     flexDirection: "row",
     display: "flex",
-    padding: "10px",
+    padding: "10px"
   },
   bold: {
     paddingTop: "10px",
-    fontWeight: "bold",
+    fontWeight: "bold"
   },
   text: {
-    paddingTop: "10px",
+    paddingTop: "10px"
   },
   buttonContainer: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "row"
   },
   button: {
     borderWidth: 1,
@@ -54,47 +54,47 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     height: "max-content",
     borderRadius: 20,
-    padding: "10px",
-  },
+    padding: "10px"
+  }
 });
 
 const textConfigs: ITextConfigs[] = [
   {
     style: styles.bold,
     property: "Transaction ID:",
-    value: "id",
+    value: "id"
   },
   {
     style: styles.text,
     property: "From user:",
-    value: "fromUser",
+    value: "fromUser"
   },
   {
     style: styles.text,
     property: "To user:",
-    value: "toUser",
+    value: "toUser"
   },
   {
     style: styles.bold,
     property: "",
-    value: "amount",
-  },
+    value: "amount"
+  }
 ];
 
-export const Transaction: SFC<ITransactionProps> = (props) => {
+export const Transaction: SFC<ITransactionProps> = props => {
   const [
     markTransaction,
-    { loading: mutationLoading, error: mutationError },
+    { loading: mutationLoading, error: mutationError }
   ] = useMutation(queryList.MARK_TRANSACTION, {
     onCompleted(data: {
-        markTransactionSuspicious: {
-            id: number;
-        }
+      markTransactionSuspicious: {
+        id: number;
+      };
     }) {
       if (data) {
         props.setTransactionStatusChange(data.markTransactionSuspicious.id);
       }
-    },
+    }
   });
 
   if (mutationLoading)
@@ -118,7 +118,7 @@ export const Transaction: SFC<ITransactionProps> = (props) => {
           style={[styles.button, { backgroundColor: "red" }]}
           onPress={() =>
             markTransaction({
-              variables: { transactionData: { id: 1, status: "Blocked" } },
+              variables: { transactionData: { id: 1, status: "Blocked" } }
             })
           }
         >
@@ -129,7 +129,7 @@ export const Transaction: SFC<ITransactionProps> = (props) => {
           style={[styles.button, { backgroundColor: "blue" }]}
           onPress={() =>
             markTransaction({
-              variables: { transactionData: { id: 1, status: "Allowed" } },
+              variables: { transactionData: { id: 1, status: "Allowed" } }
             })
           }
         >
