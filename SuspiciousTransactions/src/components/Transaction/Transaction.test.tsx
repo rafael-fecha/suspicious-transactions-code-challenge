@@ -4,25 +4,8 @@ import { render, fireEvent, waitFor } from "@testing-library/react-native";
 import { Transaction } from "./Transaction";
 
 import { MockedProvider } from "@apollo/react-testing";
-import { queryList } from "./Queries";
 
-const mocks = [
-  {
-    request: {
-      query: queryList.MARK_TRANSACTION,
-      variables: { transactionData: { id: 1, status: "Allowed" } }
-    },
-    result: {
-      data: {
-        markTransactionSuspicious: {
-          id: 1,
-          sender: "John",
-          status: "Allowed"
-        }
-      }
-    }
-  }
-];
+import { mocks } from "../../__mocks__/queryMocks";
 
 describe("Transaction component", () => {
   it("should call a parent function when marking a transaction as blocked or accepted", async () => {
@@ -44,8 +27,8 @@ describe("Transaction component", () => {
         <Transaction
           key={1}
           id={1}
-          fromUser={"TEST"}
-          toUser={"TEST"}
+          fromUser={"John"}
+          toUser={"Michael"}
           amount={formatAmount(10, "EUR", "de-DE")}
           setTransactionStatusChange={testFunctionCall}
         />

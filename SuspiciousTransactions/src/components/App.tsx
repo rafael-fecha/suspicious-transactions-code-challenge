@@ -1,22 +1,14 @@
+import { registerRootComponent } from 'expo';
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { ApolloProvider } from "react-apollo";
 import ApolloClient, { InMemoryCache } from "apollo-boost";
-import { queryList } from "./Queries";
-import { Transaction } from "./Transaction";
 
-export interface TransactionSuspiciousResponse {
-  transactionSuspicious: TransactionSuspicious[];
-}
-export interface TransactionSuspicious {
-  id: number;
-  sender: string;
-  recipient: string;
-  amount: number;
-  currency: string;
-  locale: string;
-}
+import { queryList } from "../configs/Queries";
+
+import { Transaction } from "./Transaction/Transaction";
+import { TransactionSuspicious, TransactionSuspiciousResponse } from "../interfaces/QueryResponses.interface";
 
 export const styles = StyleSheet.create({
   container: {
@@ -92,4 +84,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default registerRootComponent(App);

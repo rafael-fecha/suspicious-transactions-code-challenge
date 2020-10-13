@@ -1,6 +1,6 @@
 import { useMutation } from "react-apollo";
 
-import { queryList } from "./Queries";
+import { queryList } from "../../configs/Queries";
 
 import {
   ActivityIndicator,
@@ -14,19 +14,8 @@ import { StatusBar } from "expo-status-bar";
 
 import React, { SFC } from "react";
 
-interface ITransactionProps {
-  id: number;
-  fromUser: string;
-  toUser: string;
-  amount: string;
-  setTransactionStatusChange: (id: number) => void;
-}
-
-interface ITextConfigs {
-  style: any;
-  property: string;
-  value: keyof ITransactionProps;
-}
+import { ITransactionProps } from "../../interfaces/ComponentProps.interface";
+import { ITextConfigs } from "../../interfaces/ComponentConfigs.interface";
 
 export const styles = StyleSheet.create({
   transaction: {
@@ -99,6 +88,7 @@ export const Transaction: SFC<ITransactionProps> = props => {
 
   if (mutationLoading)
     return <ActivityIndicator size="large" color="#0000ff" />;
+    
   if (mutationError) return <p>Error :(</p>;
 
   return (

@@ -1,13 +1,4 @@
-export interface TransactionData {
-  id: number;
-  recipient: string;
-  sender: string;
-  amount: number;
-  currency: string;
-  locale: string;
-  createdDateTimestamp: number;
-  status: "Suspicious" | "Allowed" | "Blocked";
-}
+import { TransactionData, TransactionStatus } from "./interfaces/transaction.interface";
 
 export const transactions: TransactionData[] = [
   {
@@ -18,7 +9,7 @@ export const transactions: TransactionData[] = [
     currency: "USD",
     locale: "en-US",
     createdDateTimestamp: 51531515615156,
-    status: "Suspicious"
+    status: TransactionStatus.Suspicious
   },
   {
     id: 2,
@@ -28,6 +19,6 @@ export const transactions: TransactionData[] = [
     currency: "EUR",
     locale: "de-DE",
     createdDateTimestamp: 51531515615156,
-    status: "Suspicious"
+    status: TransactionStatus.Suspicious
   }
 ];

@@ -1,14 +1,17 @@
 import { Arg, Query, Mutation, Resolver } from "type-graphql";
-import { TransactionData, transactions } from "../data";
+
 import Transaction from "../schemas/Transaction";
 import { TransactionInput } from "./transactionInput";
+import { TransactionData, TransactionStatus } from "../interfaces/transaction.interface";
+
+import { transactions } from "../data";
 
 @Resolver(of => Transaction)
 export class TransactionResolver {
-  @Query(returns => [Transaction], { nullable: true })
+  @Query(returns => [Transaction])
   transactionSuspicious(): TransactionData[] | undefined {
     return transactions.filter(
-      transaction => transaction.status === "Suspicious"
+      transaction => transaction.status === TransactionStatus.Suspicious
     );
   }
 

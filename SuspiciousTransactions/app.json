@@ -1,5 +1,6 @@
 {
   "expo": {
+    "entryPoint": "./src/components/App.tsx",
     "name": "SuspiciousTransactions",
     "slug": "SuspiciousTransactions",
     "version": "1.0.0",

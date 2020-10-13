@@ -8,7 +8,7 @@ type Mutation {
 }
 
 type Query {
-  transactionSuspicious: [Transaction!]
+  transactionSuspicious: [Transaction!]!
 }
 
 type Transaction {

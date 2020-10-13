@@ -1,11 +1,5 @@
 import { Field, Int, ObjectType } from "type-graphql";
-
-enum TransactionStatus {
-  Suspicious = "Suspicious",
-  Allowed = "Allowed",
-  Blocked = "Blocked"
-}
-
+import { TransactionStatus } from "../interfaces/transaction.interface";
 @ObjectType()
 export default class Transaction {
   @Field(type => Int)
@@ -30,5 +24,5 @@ export default class Transaction {
   createdDateTimestamp?: number;
 
   @Field(type => String)
-  status: "Suspicious" | "Allowed" | "Blocked";
+  status: TransactionStatus;
 }
