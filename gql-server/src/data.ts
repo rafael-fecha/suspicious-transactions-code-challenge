@@ -4,6 +4,7 @@ export interface TransactionData {
     sender: string;
     amount: number;
     currency: string;
+    locale: string;
     createdDateTimestamp: number;
     status: 'Suspicious' | 'Allowed' | 'Blocked';
   }
@@ -14,7 +15,8 @@ export interface TransactionData {
       recipient: 'Rafa',
       sender: 'John',
       amount: 100,
-      currency: '$',
+      currency: 'USD',
+      locale: 'en-US',
       createdDateTimestamp: 51531515615156,
       status: 'Suspicious'
     },
@@ -23,7 +25,8 @@ export interface TransactionData {
       recipient: 'Rafa',
       sender: 'John',
       amount: 100,
-      currency: '$',
+      currency: 'EUR',
+      locale: 'de-DE',
       createdDateTimestamp: 51531515615156,
       status: 'Suspicious'
     }

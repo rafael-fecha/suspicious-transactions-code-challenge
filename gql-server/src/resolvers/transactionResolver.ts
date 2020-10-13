@@ -9,7 +9,7 @@ import Transaction from '../schemas/Transaction';
 import { TransactionInput } from './transactionInput';
 
 @Resolver(of => Transaction)
-export default class {
+export class TransactionResolver {
   @Query(returns => [Transaction], { nullable: true })
   transactionSuspicious(): TransactionData[] | undefined {
     return transactions.filter(transaction => transaction.status === 'Suspicious');

@@ -12,10 +12,11 @@ type Query {
 }
 
 type Transaction {
-  amount: String!
+  amount: Int!
   createdDateTimestamp: Float!
   currency: String!
   id: Int!
+  locale: String!
   recipient: String!
   sender: String!
   status: String!

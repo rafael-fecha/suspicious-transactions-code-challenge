@@ -3,7 +3,7 @@ import * as Express from 'express';
 import 'reflect-metadata';
 import { buildSchema } from 'type-graphql';
 
-import TransactionResolver from './resolvers/transactionResolver';
+import { TransactionResolver } from './resolvers/transactionResolver';
 
 async function startServer() {
   const schema = await buildSchema({
