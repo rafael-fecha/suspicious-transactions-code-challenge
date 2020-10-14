@@ -19,8 +19,8 @@ async function startServer() {
 
   server.applyMiddleware({ app });
 
-  app.listen(4000, () =>
-    console.log("Server is running on http://localhost:4000/graphql")
+  app.listen(4001, () =>
+    console.log("Server is running on http://localhost:4001/graphql")
   );
 }
 

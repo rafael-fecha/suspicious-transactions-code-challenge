@@ -1,4 +1,4 @@
-import { registerRootComponent } from 'expo';
+import { registerRootComponent } from "expo";
 import { StatusBar } from "expo-status-bar";
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
@@ -8,7 +8,10 @@ import ApolloClient, { InMemoryCache } from "apollo-boost";
 import { queryList } from "../configs/Queries";
 
 import { Transaction } from "./Transaction/Transaction";
-import { TransactionSuspicious, TransactionSuspiciousResponse } from "../interfaces/QueryResponses.interface";
+import {
+  TransactionSuspicious,
+  TransactionSuspiciousResponse
+} from "../interfaces/QueryResponses.interface";
 
 export const styles = StyleSheet.create({
   container: {
@@ -16,6 +19,10 @@ export const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center"
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold"
   }
 });
 
@@ -23,7 +30,7 @@ const App = () => {
   const [transactions, setTransactions] = useState<TransactionSuspicious[]>();
 
   const client = new ApolloClient({
-    uri: "http://localhost:4000/graphql",
+    uri: "http://localhost:4001/graphql",
     cache: new InMemoryCache()
   });
 
@@ -32,11 +39,11 @@ const App = () => {
       const { loading, data } = await client.query<
         TransactionSuspiciousResponse
       >({
-        query: queryList.GET_SUSPICIOUS_TRANSITIONS,
-        errorPolicy: "all"
+        query: queryList.GET_SUSPICIOUS_TRANSITIONS
       });
 
       if (loading) return <ActivityIndicator size="large" color="#0000ff" />;
+      
       setTransactions(data.transactionSuspicious);
     } catch (err) {
       console.error(`Error fetching suspicious transactions ${err}`);
@@ -45,7 +52,7 @@ const App = () => {
 
   const setTransactionStatusChange = (id: number): void => {
     setTransactions(
-      transactions?.filter((t: TransactionSuspicious) => t.id === id)
+      transactions?.filter((t: TransactionSuspicious) => t.id !== id)
     );
   };
 
@@ -67,17 +74,23 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <View style={styles.container}>
-        <Text>Suspicious Transactions</Text>
-        {transactions?.map((t: TransactionSuspicious) => (
-            <Transaction
-              key={t.id}
-              id={t.id}
-              fromUser={t.recipient}
-              toUser={t.sender}
-              amount={formatAmount(t.amount, t.currency, t.locale)}
-              setTransactionStatusChange={setTransactionStatusChange}
-            />
-          ))}
+        <Text style={styles.title}>Suspicious Transactions</Text>
+        {transactions?.length > 0 ? (
+          transactions
+            .sort((a,b) => b.createdDateTimestamp - a.createdDateTimestamp)
+            .map((t: TransactionSuspicious) => (
+              <Transaction
+                key={t.id}
+                id={t.id}
+                fromUser={t.recipient}
+                toUser={t.sender}
+                amount={formatAmount(t.amount, t.currency, t.locale)}
+                setTransactionStatusChange={setTransactionStatusChange}
+              />
+            ))
+        ) : (
+          <p>No transactions.</p>
+        )}
         <StatusBar style="auto" />
       </View>
     </ApolloProvider>

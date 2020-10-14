@@ -20,7 +20,10 @@ import { ITextConfigs } from "../../interfaces/ComponentConfigs.interface";
 export const styles = StyleSheet.create({
   transaction: {
     margin: "10px",
-    // border: "solid 0.5px gray",
+    borderStyle: "solid",
+    borderWidth: 2,
+    borderColor: "rgb(241, 241, 241)",
+    borderRadius: 10,
     flexDirection: "row",
     display: "flex",
     padding: "10px"
@@ -34,15 +37,16 @@ export const styles = StyleSheet.create({
   },
   buttonContainer: {
     display: "flex",
+    alignItems: 'flex-end',
     flexDirection: "row"
   },
   button: {
+    borderRadius: 12,
     borderWidth: 1,
     borderColor: "rgba(0,0,0,0.2)",
     alignItems: "center",
     justifyContent: "center",
     height: "max-content",
-    borderRadius: 20,
     padding: "10px"
   }
 });
@@ -55,12 +59,12 @@ const textConfigs: ITextConfigs[] = [
   },
   {
     style: styles.text,
-    property: "From user:",
+    property: "From User:",
     value: "fromUser"
   },
   {
     style: styles.text,
-    property: "To user:",
+    property: "To User:",
     value: "toUser"
   },
   {
@@ -105,10 +109,10 @@ export const Transaction: SFC<ITransactionProps> = props => {
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[styles.button, { backgroundColor: "red" }]}
+          style={[styles.button, { backgroundColor: "rgb(192, 90, 90)" }]}
           onPress={() =>
             markTransaction({
-              variables: { transactionData: { id: 1, status: "Blocked" } }
+              variables: { transactionData: { id: props.id, status: "Blocked" } }
             })
           }
         >
@@ -116,10 +120,10 @@ export const Transaction: SFC<ITransactionProps> = props => {
         </TouchableOpacity>
         <TouchableOpacity
           activeOpacity={0.8}
-          style={[styles.button, { backgroundColor: "blue" }]}
+          style={[styles.button, { backgroundColor: "rgb(39, 196, 180)", marginLeft: '8px' }]}
           onPress={() =>
             markTransaction({
-              variables: { transactionData: { id: 1, status: "Allowed" } }
+              variables: { transactionData: { id: props.id, status: "Allowed" } }
             })
           }
         >

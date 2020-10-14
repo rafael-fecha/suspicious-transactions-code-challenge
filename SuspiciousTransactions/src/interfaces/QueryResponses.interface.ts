@@ -9,4 +9,5 @@ export interface TransactionSuspicious {
     amount: number;
     currency: string;
     locale: string;
+    createdDateTimestamp: number;
 }

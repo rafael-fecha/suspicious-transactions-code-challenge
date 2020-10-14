@@ -10,6 +10,7 @@ export const queryList = {
         amount
         currency
         locale
+        createdDateTimestamp
       }
     }
   `,
