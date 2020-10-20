@@ -21,12 +21,26 @@ export class TransactionResolver {
     id,
     status
   }: TransactionInput): TransactionData {
-    const foundTransaction = transactions.find(t => t.id === id);
-    if (!foundTransaction) {
-      throw new Error(`Couldn't find transaction with id ${id}`);
-    }
-
-    foundTransaction.status = status;
+    const foundTransaction = transactions.find((t) => t.id === id);
+    this.blockTransactions(foundTransaction);
     return foundTransaction;
+  }
+
+  private blockTransactions(transaction) {
+    console.log('blockTransactions', transaction);
+    transaction.status = 'blocked';
+  
+  const foundTransactions = transactions.filter(t => {
+        return this.findTransactionWhereRecipientIsSender(transaction, t);
+  });
+  
+  foundTransactions.forEach((t) => {
+    this.blockTransactions(t);
+  })
+  
+  }
+  
+  private findTransactionWhereRecipientIsSender(transaction, t) {
+    return transaction?.recipient === t.sender;
   }
 }
